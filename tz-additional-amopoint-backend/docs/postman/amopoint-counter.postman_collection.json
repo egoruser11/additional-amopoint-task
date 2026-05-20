@@ -1,0 +1,352 @@
+{
+  "info": {
+    "_postman_id": "9b4dfdb8-1d33-4f4e-a523-3f967b855f44",
+    "name": "Amopoint Counter - Visit Ingestion",
+    "description": "Коллекция для ручной отправки визитов в БД через POST /api/visits. Подходит для локальной демонстрации графиков без GeoLite2.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Запись визитов в БД",
+      "item": [
+        {
+          "name": "Desktop visit - Moscow",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"201 Created\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Visit accepted\", function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json.data.accepted).to.eql(true);",
+                  "    pm.expect(json.data.id).to.be.a(\"number\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"visitor_id\": \"postman-desktop-moscow-{{$guid}}\",\n  \"site_host\": \"demo-site.local\",\n  \"page_title\": \"Главная страница\",\n  \"page_url\": \"https://demo-site.local/?utm_source=postman#hero\",\n  \"referrer\": \"https://search.example/results?q=amopoint\",\n  \"city\": \"Moscow\",\n  \"country\": \"RU\",\n  \"device_type\": \"desktop\",\n  \"browser\": \"Chrome\",\n  \"platform\": \"MacIntel\",\n  \"screen_width\": 1440,\n  \"screen_height\": 900,\n  \"language\": \"ru-RU\",\n  \"timezone\": \"Europe/Moscow\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/visits",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "visits"
+              ]
+            },
+            "description": "Создает один десктопный визит из Москвы. Query/hash в page_url и referrer будут очищены на backend."
+          }
+        },
+        {
+          "name": "Mobile visit - Kazan",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"201 Created\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Visit accepted\", function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json.data.accepted).to.eql(true);",
+                  "    pm.expect(json.data.id).to.be.a(\"number\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"visitor_id\": \"postman-mobile-kazan-{{$guid}}\",\n  \"site_host\": \"demo-site.local\",\n  \"page_title\": \"Каталог\",\n  \"page_url\": \"https://demo-site.local/catalog?session=hidden\",\n  \"referrer\": \"https://demo-site.local/\",\n  \"city\": \"Kazan\",\n  \"country\": \"RU\",\n  \"device_type\": \"mobile\",\n  \"browser\": \"Safari\",\n  \"platform\": \"iPhone\",\n  \"screen_width\": 390,\n  \"screen_height\": 844,\n  \"language\": \"ru-RU\",\n  \"timezone\": \"Europe/Moscow\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/visits",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "visits"
+              ]
+            },
+            "description": "Создает мобильный визит из Казани."
+          }
+        },
+        {
+          "name": "Tablet visit - Saint Petersburg",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"201 Created\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Visit accepted\", function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json.data.accepted).to.eql(true);",
+                  "    pm.expect(json.data.id).to.be.a(\"number\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"visitor_id\": \"postman-tablet-spb-{{$guid}}\",\n  \"site_host\": \"demo-site.local\",\n  \"page_title\": \"Статья\",\n  \"page_url\": \"https://demo-site.local/articles/analytics\",\n  \"referrer\": \"https://demo-site.local/catalog\",\n  \"city\": \"Saint Petersburg\",\n  \"country\": \"RU\",\n  \"device_type\": \"tablet\",\n  \"browser\": \"Safari\",\n  \"platform\": \"iPad\",\n  \"screen_width\": 1024,\n  \"screen_height\": 1366,\n  \"language\": \"ru-RU\",\n  \"timezone\": \"Europe/Moscow\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/visits",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "visits"
+              ]
+            },
+            "description": "Создает планшетный визит из Санкт-Петербурга."
+          }
+        },
+        {
+          "name": "Repeat visitor - first page",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"201 Created\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Visit accepted\", function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json.data.accepted).to.eql(true);",
+                  "    pm.expect(json.data.id).to.be.a(\"number\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"visitor_id\": \"postman-repeat-visitor-001\",\n  \"site_host\": \"demo-site.local\",\n  \"page_title\": \"Pricing\",\n  \"page_url\": \"https://demo-site.local/pricing\",\n  \"referrer\": \"https://demo-site.local/\",\n  \"city\": \"Yekaterinburg\",\n  \"country\": \"RU\",\n  \"device_type\": \"desktop\",\n  \"browser\": \"Firefox\",\n  \"platform\": \"Linux x86_64\",\n  \"screen_width\": 1366,\n  \"screen_height\": 768,\n  \"language\": \"ru-RU\",\n  \"timezone\": \"Asia/Yekaterinburg\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/visits",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "visits"
+              ]
+            },
+            "description": "Первый визит одного и того же посетителя. Следующий запрос использует тот же visitor_id, чтобы проверить разницу page views и unique visitors."
+          }
+        },
+        {
+          "name": "Repeat visitor - second page",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"201 Created\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Visit accepted\", function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json.data.accepted).to.eql(true);",
+                  "    pm.expect(json.data.id).to.be.a(\"number\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"visitor_id\": \"postman-repeat-visitor-001\",\n  \"site_host\": \"demo-site.local\",\n  \"page_title\": \"Checkout\",\n  \"page_url\": \"https://demo-site.local/checkout?payment_token=hidden\",\n  \"referrer\": \"https://demo-site.local/pricing\",\n  \"city\": \"Yekaterinburg\",\n  \"country\": \"RU\",\n  \"device_type\": \"desktop\",\n  \"browser\": \"Firefox\",\n  \"platform\": \"Linux x86_64\",\n  \"screen_width\": 1366,\n  \"screen_height\": 768,\n  \"language\": \"ru-RU\",\n  \"timezone\": \"Asia/Yekaterinburg\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/visits",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "visits"
+              ]
+            },
+            "description": "Повторный визит того же visitor_id. В статистике page views увеличатся на 2, а unique visitors только на 1."
+          }
+        },
+        {
+          "name": "Bot visit - unknown city fallback",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"201 Created\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Visit accepted\", function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json.data.accepted).to.eql(true);",
+                  "    pm.expect(json.data.id).to.be.a(\"number\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"visitor_id\": \"postman-bot-{{$guid}}\",\n  \"site_host\": \"demo-site.local\",\n  \"page_title\": \"Robots\",\n  \"page_url\": \"https://demo-site.local/robots\",\n  \"referrer\": null,\n  \"device_type\": \"bot\",\n  \"browser\": \"Googlebot\",\n  \"platform\": \"bot\",\n  \"screen_width\": 0,\n  \"screen_height\": 0,\n  \"language\": \"en-US\",\n  \"timezone\": \"UTC\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/visits",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "visits"
+              ]
+            },
+            "description": "Проверяет fallback Unknown, когда city/country не переданы и GeoLite2 не подключен."
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8877",
+      "type": "string"
+    }
+  ]
+}
